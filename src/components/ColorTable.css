@@ -1,0 +1,25 @@
+.color-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.color-table th, .color-table td {
+  /* border: 1px solid #ddd; */
+  padding: 8px;
+  text-align: left;
+  background-color: #f9f6f6;
+
+}
+
+.color-table th {
+  background-color: #d8d8d8;
+}
+
+.color-box {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  border: 1px solid #888;
+}
