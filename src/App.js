@@ -7,28 +7,29 @@ const App = () => {
   const [colors, setColors] = useState([]);
   const [searchColor, setSearchColor] = useState('');
   const [loading, setLoading] = useState(false);
+  const [fetchAgain, setFetchAgain] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    const fetchColors = async () => {
-      try {
-        setLoading(true)
-        const response = await axios.get('https://raw.githubusercontent.com/NishantChandla/color-test-resources/main/xkcd-colors.json');
-        setColors(response.data.colors);
-        setLoading(false)
-      } catch (error) {
-        console.error('Error fetching colors:', error);
-      }
-    };
-
     fetchColors();
   }, []);
 
+  const fetchColors = async () => {
+    try {
+      setLoading(true)
+      const response = await axios.get('https://raw.githubusercontent.com/NishantChandla/color-test-resources/main/xkcd-colors.json');
+      setColors(response.data.colors);
+      setLoading(false)
+    } catch (error) {
+      setFetchAgain(true)
+      console.error('Error fetching colors:', error);
+    }
+  };
+
+
   const hexToRgb = (hex) => {
-    // Remove '#' if present
     hex = hex.replace('#', '');
 
-    // Parse hex value to RGB
     const bigint = parseInt(hex, 16);
     const r = (bigint >> 16) & 255;
     const g = (bigint >> 8) & 255;
@@ -49,7 +50,6 @@ const App = () => {
         b: parseInt(rgbArray[2])
       };
     } else {
-      console.error('Invalid color input');
       setErrorMessage('Invalid color input');
       return;
     }
@@ -77,13 +77,20 @@ const App = () => {
   const handleColorChange = (e) => {
     setErrorMessage('')
     setSearchColor(e.target.value)
+    if(e.target.value.length === 0) {
+      fetchColors()
+      setErrorMessage('')
+    }
   }
 
   return (
     <>
-    <input
+    <div className='tableheading'>Colour Searcher</div>
+    <input 
+        id='input'
+        className='inputbox'
         type="text"
-        placeholder="Enter color"
+        placeholder="Enter colour"
         value={searchColor}
         onChange={handleColorChange}
         onKeyDown={e => {
@@ -92,13 +99,15 @@ const App = () => {
           }
         }}
       />
+      <button onClick={handleSearch} style={{margin_left: '10px'}}>search</button>
+      {fetchAgain && <button onClick={fetchColors} style={{margin_left: '10px'}}>Retry</button>}
     {loading ? 
     <div> loading... </div> 
     : 
       (
       <div>
-      {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Render error message if present */}
-      <ColorTable colors={colors} />
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      <ColorTable colors={colors} searchedColor={searchColor} />
     </div>)}
     </>
   );
