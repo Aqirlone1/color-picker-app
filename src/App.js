@@ -53,7 +53,7 @@ const App = () => {
       setErrorMessage('Invalid color input');
       return;
     }
-
+  
     const calculateSimilarity = (color1, color2) => {
       return Math.sqrt(
         Math.pow(color1.r - color2.r, 2) +
@@ -61,18 +61,21 @@ const App = () => {
         Math.pow(color1.b - color2.b, 2)
       );
     };
-
+  
     const filteredColors = colors.filter(color => {
       return calculateSimilarity(searchRgb, hexToRgb(color.hex)) < 50; 
     });
-
-    if (filteredColors.length === 0) {
+  
+    const top100Colors = filteredColors.slice(0, 100);
+  
+    if (top100Colors.length === 0) {
       setErrorMessage('No matching colors found'); 
     } else {
-      setColors(filteredColors);
+      setColors(top100Colors);
       setErrorMessage('');
     }
   };
+  
 
   const handleColorChange = (e) => {
     setErrorMessage('')
