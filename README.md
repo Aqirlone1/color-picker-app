@@ -1,3 +1,24 @@
+
+Title: Color Search Tool
+
+Description:
+The Color Search Tool is a web application designed to help users explore and search for colors based on their hexadecimal (hex) or RGB values. The application fetches a curated list of colors from the XKCD colors JSON file and displays them in a user-friendly interface. Users can search for colors by entering either a hex color code (e.g., "#FF0000") or an RGB color code (e.g., "rgb(255, 0, 0)"). Upon entering a valid color code and pressing Enter, the application sorts the colors based on their similarity to the inputted color and displays the top matching results.
+
+Key Features:
+
+Color Search: Users can enter either hex or RGB color codes to search for colors.
+Color Similarity Sorting: The application sorts the colors based on their similarity to the searched color, allowing users to find visually similar colors quickly.
+Color Information: Each color displayed in the table includes its name, hex code, RGB code, and HSL (Hue, Saturation, Lightness) code for easy reference.
+Error Handling: The application provides error messages for invalid color inputs, guiding users to enter valid color codes.
+Loading Indicator: A loading indicator is displayed while the color data is being fetched from the server or while searching for colors, providing feedback to users.
+Technologies Used:
+
+Frontend: React.js
+Styling: CSS for styling components and layout
+Data Fetching: Axios for making HTTP requests to fetch color data
+Color Conversion: JavaScript functions for converting between hex, RGB, and HSL color formats
+This Color Search Tool serves as a useful resource for designers, developers, and anyone working with colors to explore, search, and discover new color palettes efficiently.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
