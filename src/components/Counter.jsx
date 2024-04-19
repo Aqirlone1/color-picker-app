@@ -5,7 +5,7 @@ function Counter() {
   const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
-    let intervalId;
+    let intervalId
 
     if (isRunning) {
       intervalId = setInterval(() => {
