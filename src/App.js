@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ColorTable from './components/ColorTable';
 import './App.css';
+import Counter from './components/counter';
 
 const App = () => {
   const [colors, setColors] = useState([]);
@@ -111,6 +112,7 @@ const App = () => {
       <div>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <ColorTable colors={colors} searchedColor={searchColor} />
+      {/* <Counter></Counter> */}
     </div>)}
     </>
   );
